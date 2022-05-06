@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>CARNIVORE STORE</title>
+</head>
+<body>
+    <section class="container content-section">
+        <h2 class="section-header">PRODUCTOS</h2>
+        <div class="shopitems">
+            <div class="shop-item">
+                <span class="shop-item-title">Carré de Cerdo</span>
+                <img class="shop-item-image" src="./multimedia/producto/cerdo/carre-deshuesado.jpg">
+                <div class="shop-item-details">
+                    <span class="shop-item-price">$749.99</span>
+                    <button class="btn btn-primary bi bi-cart-plus" type="button"> Al carrito</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <span class="shop-item-title">Brochetts</span>
+                <img class="shop-item-image" src="./multimedia/producto/aves/brochete-pollo.jpg">
+                <div class="shop-item-details">
+                    <span class="shop-item-price">$1399.99</span>
+                    <button class="btn btn-primary bi bi-cart-plus" type="button"> Al carrito</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <span class="shop-item-title">Bondiola</span>
+                <img class="shop-item-image" src="./multimedia/producto/cerdo/bondiola_2.jpg">
+                <div class="shop-item-details">
+                    <span class="shop-item-price">$959.99</span>
+                    <button class="btn btn-primary bi bi-cart-plus" type="button"> Al carrito</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <span class="shop-item-title">Asado</span>
+                <img class="shop-item-image" src="./multimedia/producto/vacuno/asado-new.jpg">
+                <div class="shop-item-details">
+                    <span class="shop-item-price">$1199.99</span>
+                    <button class="btn btn-primary bi bi-cart-plus" type="button"> Al carrito</button>
+                </div>
+            </div>
+        </div>
+    </section> 
+    </section>
+    <section class="container content-section">
+        <h2 class="section-header">CARRITO DE COMPRAS</h2>
+        <div class="carr-row">
+            <span class="carr-item carr-header carr-column">PRODUCTO</span>
+            <span class="carr-price carr-header carr-column">PRECIO</span>
+            <span class="carr-quantity carr-header carr-column">CANTIDAD</span>
+        </div>
+        <div class="carr-items">
+            <div class="carr-row">
+                <div class="carr-item carr-column">
+                    <img class="carr-item-image" src="./multimedia/producto/aves/nuggets_1.jpg" width="100" height="100">
+                    <span class="carr-item-title">Nuggets</span>
+                </div>
+                <span class="carr-price carr-column">$1120</span>
+                <div class="carr-cantidad carr-column">
+                    <input class="carr-cantidad-input" type="number" value="1">
+                    <button class="btn btn-danger" type="button">REMOVER</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="carr-total">
+            <strong class="carr-total-txt">Total</strong>
+            <span class="carr-total-precio">$00.00</span>
+        </div>
+        <button class="btn btn-primary btn-comprar" type="button">COMPRAR</button>
+    </section>
+    <footer class="main-footer">
+            <h3 class="">CARNIVORE</h3>
+
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
+</body>
+</html>
