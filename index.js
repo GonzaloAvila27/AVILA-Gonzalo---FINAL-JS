@@ -75,4 +75,13 @@ function adItemToCart(nombreProducto, precioProducto, imgProducto) {
     carrLinea.getElementsByClassName("borrar")[0].addEventListener("click", borrarProducto)
     carrLinea.getElementsByClassName("carr-cantidad-input")[0].addEventListener("change", cambioCantidad)
 }
+document.getElementsByClassName("btn-comprar")[0].addEventListener("click", compro )
+function compro() {
+    alert("Gracias por su compra!")
+    let carrItems = document.getElementsByClassName("carr-items")[0]
+    while(carrItems.hasChildNodes()){
+        carrItems.removeChild(carrItems.firstChild)
+    }
+    totalCarrito()
+}
 
