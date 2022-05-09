@@ -16,11 +16,12 @@ function totalCarrito(){
 const removerProducto = document.getElementsByClassName("borrar")
 for (let i = 0; i < removerProducto.length; i++){
     let boton = removerProducto[i]
-    boton.addEventListener("click", function(e){
-        let clickBoton = e.target 
-        clickBoton.parentElement.parentElement.remove()
-        totalCarrito()
-    })
+    boton.addEventListener("click", borrarProducto)
+}
+function borrarProducto(e){
+    let clickBoton = e.target 
+    clickBoton.parentElement.parentElement.remove()
+    totalCarrito()
 }
 const inputCantidad = document.getElementsByClassName("carr-cantidad-input")
 for (let i = 0; i < inputCantidad.length; i++){
@@ -71,7 +72,7 @@ function adItemToCart(nombreProducto, precioProducto, imgProducto) {
         </div> `
     carrLinea.innerHTML = contenidoCarrRow
     carrItems.append(carrLinea)
-    carrLinea.getElementsByClassName("borrar")[0].addEventListener("click", removerProducto)
+    carrLinea.getElementsByClassName("borrar")[0].addEventListener("click", borrarProducto)
     carrLinea.getElementsByClassName("carr-cantidad-input")[0].addEventListener("change", cambioCantidad)
 }
 
