@@ -1,3 +1,19 @@
+function totalCarrito(){
+    let contenedorProducto = document.getElementsByClassName("carr-items")[0]
+    let carrRows = contenedorProducto.getElementsByClassName("carr-row")
+    let total = 0
+    for (let i = 0; i < carrRows.length; i++){
+        let carrRow = carrRows[i]
+        let precioRow = carrRow.getElementsByClassName("carr-price")[0]
+        let cantidadRow = carrRow.getElementsByClassName("carr-cantidad-input")[0]
+        console.log(precioRow, cantidadRow);
+        let precio = parseFloat(precioRow.innerText.replace(`$`, ` `))
+        let cantidad = cantidadRow.value
+        total = total + (precio * cantidad)
+    }
+    total = Math.round(total * 100) / 100
+    document.getElementsByClassName("precio-total")[0].innerText = `$` + total
+}
 const removerProducto = document.getElementsByClassName("borrar")
 for (let i = 0; i < removerProducto.length; i++){
     let boton = removerProducto[i]
@@ -18,22 +34,6 @@ function cambioCantidad(e) {
         input.value = 1
     }
     totalCarrito()
-}
-function totalCarrito(){
-    let contenedorProducto = document.getElementsByClassName("carr-items")[0]
-    carrRows = contenedorProducto.getElementsByClassName("carr-row")
-    let total = 0
-    for (let i = 0; i < carrRows.length; i++){
-        let carrRow = carrRows[i]
-        let precioRow = carrRow.getElementsByClassName("carr-price")[0]
-        let cantidadRow = carrRow.getElementsByClassName("carr-cantidad-input")[0]
-        let precio = parseFloat(precioRow.innerText.replace("$", " "))
-        let cantidad = cantidadRow.value
-        total = total + (precio * cantidad)
-    }
-    total = Math.round(total * 100) / 100
-    document.getElementsByClassName("precio-total")[0].innerText = `$` + total
-    console.log(total);
 }
 const agregarAlCarrito = document.getElementsByClassName("bi-cart-plus")
 for (let i = 0; i < agregarAlCarrito.length; i++){
@@ -67,3 +67,4 @@ function adItemToCart(nombreProducto, precioProducto, imgProducto) {
     carrLinea.getElementsByClassName("borrar")[0].addEventListener("click", removerProducto)
     carrLinea.getElementsByClassName("carr-cantidad-input")[0].addEventListener("change", cambioCantidad)
 }
+
