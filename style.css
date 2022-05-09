@@ -1,61 +1,45 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700');
-@import url("https://fonts.googleapis.com/css?family=Metal+Mania");
-
-@font-face {
-    font-family: "Booter - Zero Zero";
-    src: url("Fonts/Booter - Zero Zero.woff") format("woff"),
-         url("Fonts/Booter - Zero Zero.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-}
-
 * {
-    box-sizing: border-box;
-    font-family: Raleway;
+    font-family: sans-serif;
     color: #777;
-}
-
-html, body {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     min-height: 100%;
+    background-image: url(/multimedia/svg/fondodiscreto.svg);
 }
-
-
-
-
-.content-section {
-    margin: 1em;
-}
-
 .container {
+    background-color: rgb(255, 255, 255);
     max-width: 900px;
     margin: 0 auto;
     padding: 0 1.5em;
 }
 .section-header {
+    margin-top: 4rem;
     font-family: sans-serif;
     font-weight: bold;
     color: #333;
     text-align: center;
-    font-size: 2.5em;
+    font-size: 2.5rem;
 }
 .main-footer {
     background-color: crimson;
     color: white;
-    padding: .25em 0;
+    padding: .25rem 0;
 }
 .btn {
     text-align: center;
     vertical-align: middle;
-    padding: .67em .67em;
+    padding: .67rem .67rem;
     cursor: pointer;
 }
 .btn-primary {
     color: white;
     background-color:crimson;
     border: none;
-    border-radius: .3em;
+    border-radius: .3rem;
     font-weight: bold;
 }
 
@@ -67,6 +51,10 @@ html, body {
 }
 .shop-item {
     margin: 30px;
+}
+.shop-item:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
 }
 .shop-item-title {
     display: block;
@@ -91,7 +79,7 @@ html, body {
 .shop-item-price {
     flex-grow: 1;
     color: #333;
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 
 .shopitems {
@@ -102,7 +90,7 @@ html, body {
 
 .carr-header {
     font-weight: bold;
-    font-size: 1.25em;
+    font-size: 1.25rem;
     color: #333;
 }
 
@@ -110,7 +98,7 @@ html, body {
     display: flex;
     align-items: center;
     border-bottom: 1px solid black;
-    margin-right: 1.5em;
+    margin-right: 1.5rem;
     padding-bottom: 10px;
     margin-top: 10px;
 }
@@ -125,7 +113,7 @@ html, body {
 
 .carr-price {
     width: 20%;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     color: #333;
 }
 
@@ -135,8 +123,8 @@ html, body {
 
 .carr-item-title {
     color: #333;
-    margin-left: .5em;
-    font-size: 1.2em;
+    margin-left: .5rem;
+    font-size: 1.2rem;
 }
 
 .carr-item-image {
@@ -162,18 +150,9 @@ html, body {
     color: #333;
     padding: 0;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     margin-right: 25px;
 }
-
-.carr-row:last-child {
-    border-bottom: 1px solid black;
-}
-
-.carr-row:last-child .carr-column {
-    border: none;
-}
-
 .carr-total {
     text-align: end;
     margin-top: 10px;
@@ -187,13 +166,18 @@ html, body {
     margin-right: 20px;
 }
 
-.carr-total-precio {
-    color: #333;
-    font-size: 1.1em;
+.precio-total {
+    color: rgb(0, 0, 0);
+    font-size: 2rem;
+    font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .btn-comprar {
     display: block;
     margin: 40px auto 80px auto;
-    font-size: 1.75em;
+    font-size: 1.75rem;
+}
+.btn-comprar:hover {
+    transform: scale(1.2);
+    transition: 1s;
 }
