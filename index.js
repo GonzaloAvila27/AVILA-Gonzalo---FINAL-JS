@@ -6,7 +6,6 @@ function totalCarrito(){
         let carrRow = carrRows[i]
         let precioRow = carrRow.getElementsByClassName("carr-price")[0]
         let cantidadRow = carrRow.getElementsByClassName("carr-cantidad-input")[0]
-        console.log(precioRow, cantidadRow);
         let precio = parseFloat(precioRow.innerText.replace(`$`, ` `))
         let cantidad = cantidadRow.value
         total = total + (precio * cantidad)
@@ -47,11 +46,19 @@ function agregarAlCarrClick(e) {
     let precioProducto = productoCompleto.getElementsByClassName("shop-item-price")[0].innerHTML
     let imgProducto = productoCompleto.getElementsByClassName("shop-item-image")[0].src
     adItemToCart(nombreProducto, precioProducto, imgProducto)
+    totalCarrito()
 }
 function adItemToCart(nombreProducto, precioProducto, imgProducto) {
-    let carrLinea = document.createElement("div")
+    let carrLinea = document.createElement(`div`)
     carrLinea.classList.add("carr-row")
     let carrItems = document.getElementsByClassName("carr-items")[0]
+    let repetidos = carrItems.getElementsByClassName("carr-item-title")
+    for (let i = 0; i < repetidos.length; i++) {
+        if (repetidos[i].innerText === nombreProducto) {
+            alert ("El producto ya está en el carrito de compras")
+            return
+        }       
+    }
     let contenidoCarrRow = `
         <div class="carr-item carr-column">
             <img class="carr-item-image" src="${imgProducto}" width="100" height="100">
