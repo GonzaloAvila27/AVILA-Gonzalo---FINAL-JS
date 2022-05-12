@@ -13,21 +13,29 @@ function totalCarrito(){
     total = Math.round(total * 100) / 100
     document.getElementsByClassName("precio-total")[0].innerText = `$` + total
 }
+
+
 const removerProducto = document.getElementsByClassName("borrar")
 for (let i = 0; i < removerProducto.length; i++){
     let boton = removerProducto[i]
     boton.addEventListener("click", borrarProducto)
 }
+
+
 function borrarProducto(e){
     let clickBoton = e.target 
     clickBoton.parentElement.parentElement.remove()
     totalCarrito()
 }
+
+
 const inputCantidad = document.getElementsByClassName("carr-cantidad-input")
 for (let i = 0; i < inputCantidad.length; i++){
     let input = inputCantidad[i] 
     input.addEventListener("change", cambioCantidad)
 }
+
+
 function cambioCantidad(e) {
     let input = e.target
     if (isNaN(input.value) || input.value <= 0) {
@@ -35,11 +43,15 @@ function cambioCantidad(e) {
     }
     totalCarrito()
 }
+
+
 const agregarAlCarrito = document.getElementsByClassName("bi-cart-plus")
 for (let i = 0; i < agregarAlCarrito.length; i++){
     let agregarCarr = agregarAlCarrito[i]
     agregarCarr.addEventListener("click", agregarAlCarrClick )
 }
+
+
 function agregarAlCarrClick(e) {
     let agregarCarr = e.target 
     let productoCompleto = agregarCarr.parentElement.parentElement
@@ -49,6 +61,8 @@ function agregarAlCarrClick(e) {
     adItemToCart(nombreProducto, precioProducto, imgProducto)
     totalCarrito()
 }
+
+
 function adItemToCart(nombreProducto, precioProducto, imgProducto) {
     let carrLinea = document.createElement(`div`)
     carrLinea.classList.add("carr-row")
@@ -75,6 +89,8 @@ function adItemToCart(nombreProducto, precioProducto, imgProducto) {
     carrLinea.getElementsByClassName("borrar")[0].addEventListener("click", borrarProducto)
     carrLinea.getElementsByClassName("carr-cantidad-input")[0].addEventListener("change", cambioCantidad)
 }
+
+
 document.getElementsByClassName("btn-comprar")[0].addEventListener("click", compro )
 function compro() {
     alert("Gracias por su compra!")
