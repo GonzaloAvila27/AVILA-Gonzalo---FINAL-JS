@@ -1,3 +1,85 @@
+//CREAR SHOP ITEM
+
+jsonShopItems.productos.forEach((i) => displayProducto(i));
+
+function displayProducto(datos) {     
+    const div = document.createElement(`div`); 
+    div.innerHTML =
+    `<div class="shop-item">
+    <span class="shop-item-title">`+datos.producto+`</span>
+    <img class="shop-item-image" src="`+datos.imagendisplay+`">
+    <div class="shop-item-details">
+    <span class="shop-item-price">`+datos.price+`</span>
+    <button class="btn btn-primary bi bi-cart-plus" type="button"> Al carrito</button>
+    </div>`
+     document.getElementById("shopItemss").appendChild(div);
+}
+//CREAR ROW EN CARRITO
+const agregarAlCarrito = document.getElementsByClassName("bi-cart-plus")
+for (let i = 0; i < agregarAlCarrito.length; i++){
+    let agregarCarr = agregarAlCarrito[i]
+    agregarCarr.addEventListener("click", agregarAlCarrClick )
+}
+function agregarAlCarrClick(e) {
+    let agregarCarr = e.target 
+    let productoCompleto = agregarCarr.parentElement.parentElement
+    let nombreProducto = productoCompleto.getElementsByClassName("shop-item-title")[0].innerHTML
+    let precioProducto = productoCompleto.getElementsByClassName("shop-item-price")[0].innerHTML
+    let imgProducto = productoCompleto.getElementsByClassName("shop-item-image")[0].src
+    addCarr(nombreProducto, precioProducto, imgProducto)
+    totalCarrito()
+}
+function addCarr(nombreProducto, precioProducto, imgProducto) {
+    let carrLinea = document.createElement(`div`)
+    carrLinea.classList.add("carr-row")
+    let carrItems = document.getElementsByClassName("carr-items")[0]
+    let repetidos = carrItems.getElementsByClassName("carr-item-title")
+    for (let i = 0; i < repetidos.length; i++) {
+        if (repetidos[i].innerText === nombreProducto) {
+            alert ("El producto ya está en el carrito de compras")
+            return
+        }       
+    }
+    let contenidoCarrRow = `
+    <div class="carr-item carr-column">
+    <img class="carr-item-image" src="${imgProducto}" width="100" height="100">
+    <span class="carr-item-title">${nombreProducto}</span>
+    </div>
+    <span class="carr-price carr-column">${precioProducto}</span>
+    <div class="carr-cantidad carr-column">
+    <input class="carr-cantidad-input" type="number" value="1">
+    <button class="btn btn-danger borrar" type="button">REMOVER</button>
+    </div> `
+    carrLinea.innerHTML = contenidoCarrRow
+    carrItems.append(carrLinea)
+    carrLinea.getElementsByClassName("borrar")[0].addEventListener("click", borrarProducto)
+    carrLinea.getElementsByClassName("carr-cantidad-input")[0].addEventListener("change", cambioCantidad)
+}
+//BTN REMOVER
+const removerProducto = document.getElementsByClassName("borrar")
+for (let i = 0; i < removerProducto.length; i++){
+    let boton = removerProducto[i]
+    boton.addEventListener("click", borrarProducto)
+}
+function borrarProducto(e){
+    let clickBoton = e.target 
+    clickBoton.parentElement.parentElement.remove()
+    totalCarrito()
+}
+//CANTIDAD LISTENER
+const inputCantidad = document.getElementsByClassName("carr-cantidad-input")
+for (let i = 0; i < inputCantidad.length; i++){
+    let input = inputCantidad[i] 
+    input.addEventListener("change", cambioCantidad)
+}
+function cambioCantidad(e) {
+    let input = e.target
+    if (isNaN(input.value) || input.value <= 0) {
+        input.value = 1
+    }
+    totalCarrito()
+}
+//TOTAL COMPRA
 function totalCarrito(){
     let contenedorProducto = document.getElementsByClassName("carr-items")[0]
     let carrRows = contenedorProducto.getElementsByClassName("carr-row")
@@ -13,84 +95,7 @@ function totalCarrito(){
     total = Math.round(total * 100) / 100
     document.getElementsByClassName("precio-total")[0].innerText = `$` + total
 }
-
-
-const removerProducto = document.getElementsByClassName("borrar")
-for (let i = 0; i < removerProducto.length; i++){
-    let boton = removerProducto[i]
-    boton.addEventListener("click", borrarProducto)
-}
-
-
-function borrarProducto(e){
-    let clickBoton = e.target 
-    clickBoton.parentElement.parentElement.remove()
-    totalCarrito()
-}
-
-
-const inputCantidad = document.getElementsByClassName("carr-cantidad-input")
-for (let i = 0; i < inputCantidad.length; i++){
-    let input = inputCantidad[i] 
-    input.addEventListener("change", cambioCantidad)
-}
-
-
-function cambioCantidad(e) {
-    let input = e.target
-    if (isNaN(input.value) || input.value <= 0) {
-        input.value = 1
-    }
-    totalCarrito()
-}
-
-
-const agregarAlCarrito = document.getElementsByClassName("bi-cart-plus")
-for (let i = 0; i < agregarAlCarrito.length; i++){
-    let agregarCarr = agregarAlCarrito[i]
-    agregarCarr.addEventListener("click", agregarAlCarrClick )
-}
-
-
-function agregarAlCarrClick(e) {
-    let agregarCarr = e.target 
-    let productoCompleto = agregarCarr.parentElement.parentElement
-    let nombreProducto = productoCompleto.getElementsByClassName("shop-item-title")[0].innerHTML
-    let precioProducto = productoCompleto.getElementsByClassName("shop-item-price")[0].innerHTML
-    let imgProducto = productoCompleto.getElementsByClassName("shop-item-image")[0].src
-    adItemToCart(nombreProducto, precioProducto, imgProducto)
-    totalCarrito()
-}
-
-
-function adItemToCart(nombreProducto, precioProducto, imgProducto) {
-    let carrLinea = document.createElement(`div`)
-    carrLinea.classList.add("carr-row")
-    let carrItems = document.getElementsByClassName("carr-items")[0]
-    let repetidos = carrItems.getElementsByClassName("carr-item-title")
-    for (let i = 0; i < repetidos.length; i++) {
-        if (repetidos[i].innerText === nombreProducto) {
-            alert ("El producto ya está en el carrito de compras")
-            return
-        }       
-    }
-    let contenidoCarrRow = `
-        <div class="carr-item carr-column">
-            <img class="carr-item-image" src="${imgProducto}" width="100" height="100">
-            <span class="carr-item-title">${nombreProducto}</span>
-        </div>
-            <span class="carr-price carr-column">${precioProducto}</span>
-        <div class="carr-cantidad carr-column">
-            <input class="carr-cantidad-input" type="number" value="1">
-            <button class="btn btn-danger borrar" type="button">REMOVER</button>
-        </div> `
-    carrLinea.innerHTML = contenidoCarrRow
-    carrItems.append(carrLinea)
-    carrLinea.getElementsByClassName("borrar")[0].addEventListener("click", borrarProducto)
-    carrLinea.getElementsByClassName("carr-cantidad-input")[0].addEventListener("change", cambioCantidad)
-}
-
-
+// BTN COMPRAR
 document.getElementsByClassName("btn-comprar")[0].addEventListener("click", compro )
 function compro() {
     alert("Gracias por su compra!")
