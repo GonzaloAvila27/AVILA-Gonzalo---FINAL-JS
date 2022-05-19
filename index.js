@@ -1,6 +1,6 @@
 //CREAR SHOP ITEM
 
-jsonShopItems.productos.forEach((i) => displayProducto(i));
+productos.forEach((i) => displayProducto(i));
 
 function displayProducto(datos) {     
     const div = document.createElement(`div`); 
