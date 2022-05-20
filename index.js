@@ -1,41 +1,43 @@
+// Constantes 
+const agregarAlCarrito = document.getElementsByClassName("bi-cart-plus")
+const removerProducto = document.getElementsByClassName("borrar")
 const products = document.querySelector(".shopitems")
 EventListener()
-
 //CREAR SHOP ITEM
 function EventListener(){
-window.addEventListener("DOMContentLoaded", () => {loadJSON();
-    console.log('DOM fully loaded and parsed');
-})
-function loadJSON(){
-    fetch("products.json")
-    .then(response => response.json())
-    .then(data => {
-        let html = "";
-        data.forEach(product => {
-            html += `
-            <div class="shop-item">
+    window.addEventListener("DOMContentLoaded", () => {loadJSON();
+    })
+    function loadJSON(){
+        fetch("products.json")
+        .then(response => response.json())
+        .then(data => {
+            let html = "";
+            data.forEach(product => {
+                html += `
+                <div class="shop-item">
                 <span class="shop-item-title">${product.producto}</span>
                 <img class="shop-item-image" src=${product.imagendisplay}>
                 <div class="shop-item-details">
-                <span class="shop-item-price">${product.price}</span>
+                <span class="shop-item-price">$${product.price}</span>
                 <button class="btn btn-primary bi bi-cart-plus" type="button"> Al carrito</button>
-            </div>`
-        });
-        products.innerHTML = html;
+                </div>`;
+                
+            });
+            products.innerHTML = html;
+            products.getElementsByClassName("bi-cart-plus").addEventListener("click", agregarAlCarrClick) 
     })     
     .catch(error => {
-        alert("error en el servidor - puta madre")
+        alert("error en el servidor - put@ madre")
     } )
-
+    
 } 
 }
 //CREAR ROW EN CARRITO
-const agregarAlCarrito = document.getElementsByClassName("bi-cart-plus")
 for (let i = 0; i < agregarAlCarrito.length; i++){
     let agregarCarr = agregarAlCarrito[i]
     agregarCarr.addEventListener("click", agregarAlCarrClick )
 }
-function agregarAlCarrClick(e) {
+function agregarAlCarrClick(e) {  //tengo q modificar todo esto para sacar desde el JSON
     let agregarCarr = e.target 
     let productoCompleto = agregarCarr.parentElement.parentElement
     let nombreProducto = productoCompleto.getElementsByClassName("shop-item-title")[0].innerHTML
@@ -71,7 +73,6 @@ function addCarr(nombreProducto, precioProducto, imgProducto) {
     carrLinea.getElementsByClassName("carr-cantidad-input")[0].addEventListener("change", cambioCantidad)
 }
 //BTN REMOVER
-const removerProducto = document.getElementsByClassName("borrar")
 for (let i = 0; i < removerProducto.length; i++){
     let boton = removerProducto[i]
     boton.addEventListener("click", borrarProducto)

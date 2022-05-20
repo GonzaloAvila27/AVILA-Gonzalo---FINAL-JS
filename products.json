@@ -2,21 +2,21 @@
     {
         "producto": "Carré de Cerdo",
         "imagendisplay": "./multimedia/producto/cerdo/carre-deshuesado.jpg",
-        "price": "$749.99"
+        "price": "700"
     },
     {
         "producto": "Bondiola",
         "imagendisplay": "./multimedia/producto/cerdo/bondiola_2.jpg",
-        "price": "$959.99"
+        "price": "950"
     },
     {
         "producto": "Asado",
         "imagendisplay": "./multimedia/producto/vacuno/asado-new.jpg",
-        "price": "$1199.99"
+        "price": "1100"
     },
     {
         "producto": "Brochetts",
         "imagendisplay": "./multimedia/producto/aves/brochete-pollo.jpg",
-        "price": "$1399.99"
+        "price": "1300"
     }
 ]
