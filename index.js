@@ -1,4 +1,5 @@
 const products = document.querySelector(".shopitems")
+EventListener()
 
 //CREAR SHOP ITEM
 function EventListener(){
@@ -27,19 +28,6 @@ function loadJSON(){
     } )
 
 } 
-}
-EventListener()
-function displayProducto(datos) {     
-    const div = document.createElement(`div`); 
-    div.innerHTML =
-    `<div class="shop-item">
-    <span class="shop-item-title">`+datos.producto+`</span>
-    <img class="shop-item-image" src="`+datos.imagendisplay+`">
-    <div class="shop-item-details">
-    <span class="shop-item-price">`+datos.price+`</span>
-    <button class="btn btn-primary bi bi-cart-plus" type="button"> Al carrito</button>
-    </div>`
-    document.getElementById("shopItemss").appendChild(div);
 }
 //CREAR ROW EN CARRITO
 const agregarAlCarrito = document.getElementsByClassName("bi-cart-plus")

@@ -50,11 +50,7 @@ body {
     color: white;
 }
 .shop-item {
-    margin: 30px;
-}
-.shop-item:hover {
-    transform: scale(1.05);
-    transition: 0.5s;
+    margin: 20px;
 }
 .shop-item-title {
     display: block;
