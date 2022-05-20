@@ -1,7 +1,34 @@
+const products = document.querySelector(".shopitems")
+
 //CREAR SHOP ITEM
+function EventListener(){
+window.addEventListener("DOMContentLoaded", () => {loadJSON();
+    console.log('DOM fully loaded and parsed');
+})
+function loadJSON(){
+    fetch("products.json")
+    .then(response => response.json())
+    .then(data => {
+        let html = "";
+        data.forEach(product => {
+            html += `
+            <div class="shop-item">
+                <span class="shop-item-title">${product.producto}</span>
+                <img class="shop-item-image" src=${product.imagendisplay}>
+                <div class="shop-item-details">
+                <span class="shop-item-price">${product.price}</span>
+                <button class="btn btn-primary bi bi-cart-plus" type="button"> Al carrito</button>
+            </div>`
+        });
+        products.innerHTML = html;
+    })     
+    .catch(error => {
+        alert("error en el servidor - puta madre")
+    } )
 
-productos.forEach((i) => displayProducto(i));
-
+} 
+}
+EventListener()
 function displayProducto(datos) {     
     const div = document.createElement(`div`); 
     div.innerHTML =
@@ -12,7 +39,7 @@ function displayProducto(datos) {
     <span class="shop-item-price">`+datos.price+`</span>
     <button class="btn btn-primary bi bi-cart-plus" type="button"> Al carrito</button>
     </div>`
-     document.getElementById("shopItemss").appendChild(div);
+    document.getElementById("shopItemss").appendChild(div);
 }
 //CREAR ROW EN CARRITO
 const agregarAlCarrito = document.getElementsByClassName("bi-cart-plus")

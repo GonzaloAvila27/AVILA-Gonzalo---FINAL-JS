@@ -1,4 +1,4 @@
- { "productos": [
+[
     {
         "producto": "Carré de Cerdo",
         "imagendisplay": "./multimedia/producto/cerdo/carre-deshuesado.jpg",
@@ -20,4 +20,3 @@
         "price": "$1399.99"
     }
 ]
-}
