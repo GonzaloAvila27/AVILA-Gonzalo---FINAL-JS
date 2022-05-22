@@ -81,6 +81,8 @@ body {
 .shopitems {
     display: flex;
     flex-wrap: wrap;
+    margin: 150px;
+    gap: 40px;
     justify-content: space-around;
 }
 

@@ -1,78 +1,100 @@
-// Constantes 
-const agregarAlCarrito = document.getElementsByClassName("bi-cart-plus")
-const removerProducto = document.getElementsByClassName("borrar")
-const products = document.querySelector(".shopitems")
+
+const products = document.querySelector(".shopitems");
+let itemID = 1;
 EventListener()
 loadJSON()
 //CREAR SHOP ITEM
 function EventListener(){
     window.addEventListener("DOMContentLoaded", () => {loadJSON();
-    })}
-    function loadJSON(){
-        fetch("products.json")
-        .then(response => response.json())
-        .then(data => {
-            let html = "";
-            data.forEach(product => {
-                html += `
-                <div class="shop-item">
-                <span class="shop-item-title">${product.producto}</span>
-                <img class="shop-item-image" src=${product.imagendisplay}>
-                <div class="shop-item-details">
-                <span class="shop-item-price">$${product.price}</span>
-                <button class="btn btn-primary bi bi-cart-plus" type="button"> Al carrito</button>
-                </div>`;
-                
+    })
+    products.addEventListener('click', eventoAgregar);
+}
+function loadJSON(){
+    fetch("products.json")
+    .then(response => response.json())
+    .then(data => {
+        let html = "";
+        data.forEach(product => {
+            html += `<div>
+            <div class="shop-item">
+            <span class="shop-item-title">${product.producto}</span>
+            <img class="shop-item-image" src=${product.imagendisplay}>
+            </div>
+            <div class="shop-item-details">
+            <span class="shop-item-price">$${product.price}</span>
+            <button class="btn btn-primary bi bi-cart-plus" type="button"> Al carrito</button>
+            </div></div>
+            `;
             });
             products.innerHTML = html;
-    })     
-    .catch(error => {
-        alert("error en el servidor - put@ madre")
-    } )
+            products.classList.add("shopitems")
+        })     
+        .catch(error => {
+            alert("error en el servidor - put@ madre")
+        } )
+        
+    } 
     
-} 
-
-//CREAR ROW EN CARRITO
-for (let i = 0; i < agregarAlCarrito.length; i++){
-    let agregarCarr = agregarAlCarrito[i]
-    agregarCarr.addEventListener("click", agregarAlCarrClick )
-}
-function agregarAlCarrClick(e) { 
-    let agregarCarr = e.target 
-    let productoCompleto = agregarCarr.parentElement.parentElement
-    let nombreProducto = productoCompleto.getElementsByClassName("shop-item-title")[0].innerHTML
-    let precioProducto = productoCompleto.getElementsByClassName("shop-item-price")[0].innerHTML
-    let imgProducto = productoCompleto.getElementsByClassName("shop-item-image")[0].src
-    addCarr(nombreProducto, precioProducto, imgProducto)
-    totalCarrito()
-}
-function addCarr(nombreProducto, precioProducto, imgProducto) {
-    let carrLinea = document.createElement(`div`)
-    carrLinea.classList.add("carr-row")
-    let carrItems = document.getElementsByClassName("carr-items")[0]
-    let repetidos = carrItems.getElementsByClassName("carr-item-title")
-    for (let i = 0; i < repetidos.length; i++) {
-        if (repetidos[i].innerText === nombreProducto) {
-            alert ("El producto ya está en el carrito de compras")
-            return
-        }       
+    //CREAR ROW EN CARRITO
+    function eventoAgregar(e){
+        if(e.target.classList.contains('bi-cart-plus')){
+            let product = e.target.parentElement.parentElement;
+            sacarInfo(product);
+        }
     }
-    let contenidoCarrRow = `
-    <div class="carr-item carr-column">
-    <img class="carr-item-image" src="${imgProducto}" width="100" height="100">
-    <span class="carr-item-title">${nombreProducto}</span>
-    </div>
-    <span class="carr-price carr-column">${precioProducto}</span>
-    <div class="carr-cantidad carr-column">
-    <input class="carr-cantidad-input" type="number" value="1">
-    <button class="btn btn-danger borrar" type="button">REMOVER</button>
-    </div> `
-    carrLinea.innerHTML = contenidoCarrRow
-    carrItems.append(carrLinea)
-    carrLinea.getElementsByClassName("borrar")[0].addEventListener("click", borrarProducto)
-    carrLinea.getElementsByClassName("carr-cantidad-input")[0].addEventListener("change", cambioCantidad)
-}
+    function sacarInfo(product){
+        let productInfo = {
+            id: itemID,
+            producto: product.querySelector('.shop-item-title').textContent,
+            imagendisplay: product.querySelector('.shop-item-image').src,
+            price: product.querySelector('.shop-item-price').textContent
+        }
+        console.log(productInfo);
+        itemID++;
+        addToCarr(productInfo);
+        //    guardarProductoStorage(productInfo);
+    }
+    const cartItems = document.querySelector(".carr-items");
+    console.log(cartItems);
+    function addToCarr(product){
+        const itemCarr = document.createElement('div');
+        itemCarr.classList.add("carr-row");
+        itemCarr.setAttribute("data-id", `${product.id}`)
+        itemCarr.innerHTML = `
+        <div class="carr-item carr-column">
+        <img class="carr-item-image" src=${product.imagendisplay} width="100" height="100">
+        <span class="carr-item-title">${product.producto}</span>
+        </div>
+        <span class="carr-price carr-column">${product.price}</span>
+        <div class="carr-cantidad carr-column">
+        <input class="carr-cantidad-input" type="number" value="1">
+        <button class="btn btn-danger borrar" type="button">REMOVER</button>
+        </div> `;
+        cartItems.appendChild(itemCarr)
+        totalCarrito()
+    }
+    function guardarProductoStorage(item){
+        let products = traerProductoStorage();
+        products.push(item);
+        localStorage.setItem('products', JSON.stringify(products));
+    }
+    function traerProductoStorage(){
+        return localStorage.getItem('products') ? JSON.parse(localStorage.getItem('products')) : [];
+    }
+
+  /*  function repetido(product) {
+     //   let carrItems = document.getElementsByClassName("carr-items")[0]
+       // let repetidos = carrItems.getElementsByClassName("carr-item-title")
+        for (let i = 0; i < repetidos.length; i++) {
+            if (repetidos[i].innerText === product.producto) {
+                alert ("El producto ya está en el carrito de compras")
+                return
+            }       
+        }
+    }   */
 //BTN REMOVER
+
+const removerProducto = document.getElementsByClassName("borrar")
 for (let i = 0; i < removerProducto.length; i++){
     let boton = removerProducto[i]
     boton.addEventListener("click", borrarProducto)
@@ -83,6 +105,7 @@ function borrarProducto(e){
     totalCarrito()
 }
 //CANTIDAD LISTENER
+/*
 const inputCantidad = document.getElementsByClassName("carr-cantidad-input")
 for (let i = 0; i < inputCantidad.length; i++){
     let input = inputCantidad[i] 
@@ -94,7 +117,7 @@ function cambioCantidad(e) {
         input.value = 1
     }
     totalCarrito()
-}
+}          */ 
 //TOTAL COMPRA
 function totalCarrito(){
     let contenedorProducto = document.getElementsByClassName("carr-items")[0]
