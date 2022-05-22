@@ -3,10 +3,11 @@ const agregarAlCarrito = document.getElementsByClassName("bi-cart-plus")
 const removerProducto = document.getElementsByClassName("borrar")
 const products = document.querySelector(".shopitems")
 EventListener()
+loadJSON()
 //CREAR SHOP ITEM
 function EventListener(){
     window.addEventListener("DOMContentLoaded", () => {loadJSON();
-    })
+    })}
     function loadJSON(){
         fetch("products.json")
         .then(response => response.json())
@@ -24,20 +25,19 @@ function EventListener(){
                 
             });
             products.innerHTML = html;
-            products.getElementsByClassName("bi-cart-plus").addEventListener("click", agregarAlCarrClick) 
     })     
     .catch(error => {
         alert("error en el servidor - put@ madre")
     } )
     
 } 
-}
+
 //CREAR ROW EN CARRITO
 for (let i = 0; i < agregarAlCarrito.length; i++){
     let agregarCarr = agregarAlCarrito[i]
     agregarCarr.addEventListener("click", agregarAlCarrClick )
 }
-function agregarAlCarrClick(e) {  //tengo q modificar todo esto para sacar desde el JSON
+function agregarAlCarrClick(e) { 
     let agregarCarr = e.target 
     let productoCompleto = agregarCarr.parentElement.parentElement
     let nombreProducto = productoCompleto.getElementsByClassName("shop-item-title")[0].innerHTML
